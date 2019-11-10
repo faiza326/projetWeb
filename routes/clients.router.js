@@ -33,6 +33,7 @@ app.use((req,res,next)=>{
     console.log("hello "+ req.params.name);
     next();
 }); */
+router.post('/register', controller.addOne);
 
 
 module.exports = router;

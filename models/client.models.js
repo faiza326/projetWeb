@@ -1,6 +1,6 @@
 const mongoose = require ("mongoose");
-//  var bcrypt = require('bcrypt');
-// var SALT_WORK_FACTOR = 10;
+ var bcrypt = require('bcrypt');
+//var SALT_WORK_FACTOR = 10;
 const Schema = mongoose.Schema;
 var client = this;
 var passportLocalMongoose = require('passport-local-mongoose');
@@ -33,10 +33,11 @@ const clientSchema = new Schema
 // };
 
 
+clientSchema.plugin(passportLocalMongoose);
 
 
 // clientSchema.pre('save', function (next) {
-//     bcrypt.hash(client.password, 10, function (err, hash) {
+//     bcrypt.hash(client.password, SALT_WORK_FACTOR, function (err, hash) {
 //       if (err) {
 //         return next(err);
 //       }
@@ -44,5 +45,16 @@ const clientSchema = new Schema
 //       next();
 //     })
 //   });
-clientSchema.plugin(passportLocalMongoose);
+
+
+//   clientSchema.pre('save', function(next) {
+//     const user = this;
+//     bcrypt.hash(client.password, 10, function(err, hash) {
+//        if (err) {
+//        return next(err);
+//        }
+//        client.password = hash;
+//        next();
+//     })
+//   });
 module.exports=mongoose.model("Client",clientSchema);
